@@ -1,0 +1,75 @@
+class MyGrid(GridLayout):
+    def __init__(self, **kwargs):
+        super(MyGrid, self).__init__(**kwargs)
+        self.cols = 1
+
+        self.inside = GridLayout()
+        self.inside.cols = 2
+
+        self.inside.add_widget(Label(text="Customer Name: "))
+        self.name = TextInput(multiline=False)
+        self.inside.add_widget(self.name)
+
+        self.inside.add_widget(Label(text="Date: "))
+        self.date = TextInput(multiline=False)
+        self.inside.add_widget(self.date)
+
+        self.inside.add_widget(Label(text="Email: "))
+        self.email = TextInput(multiline=False)
+        self.inside.add_widget(self.email)
+
+        self.inside.add_widget(Label(text="Address: "))
+        self.address = TextInput(multiline=False)
+        self.inside.add_widget(self.address)
+
+        self.inside.add_widget(Label(text="Contact Name: "))
+        self.contact = TextInput(multiline=False)
+        self.inside.add_widget(self.contact)
+
+        dropdown = DropDown()
+        payment_status_list = ["PrePaid", "Due Now", "PO"]
+        for x in payment_status_list:
+            # Adding button in drop down list
+            btn = Button(text= x, size_hint_y=None, height=40)
+
+            # binding the button to show the text when selected
+            btn.bind(on_release=lambda btn: dropdown.select(btn.text))
+
+            # then add the button inside the dropdown
+            dropdown.add_widget(btn)
+
+        self.inside.add_widget(Label(text="Terms:"))
+        # self.contact = (multiline=False)
+        self.inside.add_widget(self.contact)
+
+        self.inside.add_widget(Label(text="Contact Name: "))
+        self.contact = TextInput(multiline=False)
+        self.inside.add_widget(self.contact)
+
+        self.add_widget(self.inside)
+
+        self.submit = Button(text="Submit", font_size=40)
+        self.submit.bind(on_press=self.pressed)
+        self.add_widget(self.submit)
+
+    def pressed(self, instance):
+        name = self.name.text
+        date = self.date.text
+        email = self.email.text
+        address = self.address.text
+        contact = self.contact.text
+
+        print("Name:", name, "Date:", date, "Email:", email, "Address:", address, "Contact Name:", contact)
+        self.name.text = ""
+        self.date.text = ""
+        self.email.text = ""
+        self.address.text = ""
+        self.contact.text = ""
+class layout(App):
+    def build(self):
+        return layout()
+
+
+if __name__ == "__main__":
+    layout().run()
+# See PyCharm help at https://www.jetbrains.com/help/pycharm/
